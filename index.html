@@ -595,6 +595,15 @@
     .to-top.show { opacity: 1; pointer-events: auto; transform: translateY(0); }
     .to-top:hover { background: var(--brand-2); }
 
+    /* ========== SERVICIOS ========== */
+    .services-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; margin-bottom: 24px; }
+    @media (max-width: 900px) { .services-cards { grid-template-columns: 1fr; } }
+
+    .service-list { list-style: none; padding: 0; margin: 8px 0 14px; display: grid; gap: 8px; }
+    .service-list li { display: flex; gap: 10px; align-items: flex-start; color: var(--muted); font-size: 14px; }
+    .service-list li i { color: var(--brand); margin-top: 4px; flex-shrink: 0; }
+    .card.featured .service-list li i { color: var(--accent); }
+
     /* ========== RESPONSIVE ========== */
     @media (max-width: 1024px) {
       .hero-grid { grid-template-columns: 1fr; }
@@ -631,6 +640,7 @@
         </div>
         <div class="nav-links">
           <a href="#oferta">Oferta</a>
+          <a href="#servicios">Servicios</a>
           <a href="#cursos">Cursos</a>
           <a href="#skool">Skool</a>
           <a href="#docencia">Docencia</a>
@@ -770,6 +780,74 @@
             Solicitar propuesta <i class="fa-solid fa-arrow-right"></i>
           </a>
         </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SERVICIOS ========== -->
+  <section id="servicios">
+    <div class="container">
+      <div class="section-head" data-aos="fade-up">
+        <div class="left">
+          <div class="kicker"><i class="fa-solid fa-briefcase"></i> Servicios profesionales</div>
+          <h2 class="serif">Servicios de desarrollo y analítica avanzada</h2>
+          <p>Soy un profesional con más de 5 años de experiencia en inteligencia de negocios, análisis de datos y ciencia de datos. He liderado equipos en el desarrollo de soluciones de análisis avanzado utilizando Power BI, R, Python y técnicas de Machine Learning para transformar datos en insights clave que impulsan la toma de decisiones estratégicas.</p>
+        </div>
+      </div>
+
+      <div class="services-cards">
+        <article class="card featured" data-aos="fade-up" data-aos-delay="0">
+          <div class="icon-wrap"><i class="fa-solid fa-chart-column"></i></div>
+          <span class="tag gold">Desarrollo</span>
+          <h3>Desarrollo de reportes en Power BI</h3>
+          <p>Desarrollo de reportes de inteligencia empresarial en Power BI, desde dashboards iniciales hasta modelos analíticos avanzados. Experiencia completa en desarrollo, despliegue, capacitación, monitoreo e ideación. <strong>Más de 100 proyectos desarrollados</strong> para distintos sectores.</p>
+          <ul class="service-list">
+            <li><i class="fa-solid fa-circle-check"></i> Dashboards ejecutivos y operativos</li>
+            <li><i class="fa-solid fa-circle-check"></i> Modelos semánticos y DAX optimizado</li>
+            <li><i class="fa-solid fa-circle-check"></i> Integración con múltiples fuentes de datos</li>
+            <li><i class="fa-solid fa-circle-check"></i> Despliegue en Power BI Service</li>
+            <li><i class="fa-solid fa-circle-check"></i> Diseño visual y experiencia de usuario</li>
+          </ul>
+          <a class="btn btn-accent" href="mailto:gilvardperez@hotmail.com?subject=Solicitud%20de%20desarrollo%20en%20Power%20BI">
+            <i class="fa-solid fa-paper-plane"></i> Solicitar desarrollo
+          </a>
+        </article>
+
+        <article class="card" data-aos="fade-up" data-aos-delay="100">
+          <div class="icon-wrap"><i class="fa-solid fa-square-root-variable"></i></div>
+          <span class="tag blue">Analítica</span>
+          <h3>Modelado estadístico y ciencia de datos</h3>
+          <p>Análisis de datos con métodos de estadística descriptiva, inferencial, multivariante y bayesiana. Modelado de series de tiempo, análisis de impacto, causa raíz, pruebas de hipótesis y escenarios avanzados de negocio.</p>
+          <ul class="service-list">
+            <li><i class="fa-solid fa-circle-check"></i> Series de tiempo, RFM, Cohortes e inteligencia de tiempo</li>
+            <li><i class="fa-solid fa-circle-check"></i> Modelos actuariales, econometría y ciencia de datos</li>
+            <li><i class="fa-solid fa-circle-check"></i> Mediciones de pobreza y variables socioeconómicas</li>
+            <li><i class="fa-solid fa-circle-check"></i> Optimización, simulaciones, probabilidad y muestreos</li>
+            <li><i class="fa-solid fa-circle-check"></i> Análisis de encuestas, benchmark y market share</li>
+          </ul>
+          <a class="btn btn-primary" href="mailto:gilvardperez@hotmail.com?subject=Solicitud%20de%20modelado%20estad%C3%ADstico%20y%20an%C3%A1lisis%20de%20datos">
+            <i class="fa-solid fa-paper-plane"></i> Solicitar análisis
+          </a>
+        </article>
+      </div>
+
+      <div class="audience-grid">
+        <div class="audience" data-aos="fade-up" data-aos-delay="0">
+          <div class="ico"><i class="fa-solid fa-palette"></i></div>
+          <strong>DataViz</strong><span>Diseño de interfaces visuales, formatos condicionales y buenas prácticas de visualización.</span>
+        </div>
+        <div class="audience" data-aos="fade-up" data-aos-delay="80">
+          <div class="ico"><i class="fa-solid fa-chalkboard-user"></i></div>
+          <strong>Capacitación empresarial</strong><span>Programas de formación in-company adaptados a tu equipo.</span>
+        </div>
+        <div class="audience" data-aos="fade-up" data-aos-delay="160">
+          <div class="ico"><i class="fa-solid fa-gauge-high"></i></div>
+          <strong>Medición empresarial</strong><span>Definición de KPIs, tableros de control y métricas de negocio.</span>
+        </div>
+        <div class="audience" data-aos="fade-up" data-aos-delay="240">
+          <div class="ico"><i class="fa-solid fa-cloud"></i></div>
+          <strong>Microsoft Fabric &amp; Cloud</strong><span>Soluciones modernas de datos en la nube y arquitecturas escalables.</span>
+        </div>
       </div>
     </div>
   </section>
