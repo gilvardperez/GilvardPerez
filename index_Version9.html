@@ -1,0 +1,1133 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Gilvard Pérez | Cursos de Power BI, DAX, Power Query y analítica avanzada. Comunidad en Skool y contratación como docente independiente." />
+  <title>Gilvard Pérez | Power BI, DAX y Analítica</title>
+
+  <!-- Tipografías -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Iconos -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <!-- AOS (animaciones al hacer scroll) -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+
+  <style>
+    :root{
+      /* Paleta corporativa navy */
+      --bg: #f4f6fa;
+      --bg-2: #ffffff;
+      --surface: #ffffff;
+      --surface-2: #eef1f6;
+      --text: #0e1a2c;
+      --muted: #5a6679;
+      --brand: #072a4d;          /* azul marino principal */
+      --brand-2: #0e3e6b;
+      --brand-3: #155489;
+      --brand-soft: #e6edf5;
+      --accent: #c79a4a;         /* dorado discreto */
+      --accent-2: #a87f37;
+      --accent-soft: #f6ecd8;
+      --border: #dee3ec;
+      --border-strong: #c8cfdb;
+      --shadow-sm: 0 6px 20px rgba(7, 42, 77, .07);
+      --shadow: 0 18px 50px rgba(7, 42, 77, .12);
+      --shadow-lg: 0 30px 80px rgba(7, 42, 77, .18);
+      --radius: 18px;
+      --max: 1200px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .container {
+      width: min(100% - 32px, var(--max));
+      margin: 0 auto;
+    }
+    .serif { font-family: 'Playfair Display', Georgia, serif; font-weight: 700; }
+
+    /* ========== TOPBAR ========== */
+    .topbar {
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: blur(14px);
+      background: rgba(255,255,255,.88);
+      border-bottom: 1px solid var(--border);
+      transition: box-shadow .3s ease;
+    }
+    .topbar.scrolled { box-shadow: var(--shadow-sm); }
+
+    .nav {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 18px; padding: 12px 0;
+    }
+    .brand { display: flex; align-items: center; gap: 12px; min-width: 0; }
+    .brand-avatar {
+      width: 48px; height: 48px; border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--brand);
+      box-shadow: var(--shadow-sm);
+      transition: transform .3s ease, box-shadow .3s ease;
+    }
+    .brand-avatar:hover { transform: scale(1.06); box-shadow: 0 6px 18px rgba(7,42,77,.25); }
+    .brand-text strong { display: block; font-size: 15px; color: var(--text); }
+    .brand-text span {
+      display: block; color: var(--muted); font-size: 13px;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 560px;
+    }
+    .nav-links {
+      display: flex; gap: 18px; flex-wrap: wrap;
+      color: var(--muted); font-size: 14px; font-weight: 500;
+    }
+    .nav-links a { position: relative; padding: 4px 0; transition: color .25s ease; }
+    .nav-links a::after {
+      content: ""; position: absolute; left: 0; bottom: -2px;
+      height: 2px; width: 0; background: var(--accent);
+      transition: width .3s ease;
+    }
+    .nav-links a:hover { color: var(--brand); }
+    .nav-links a:hover::after { width: 100%; }
+
+    .nav-cta {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 16px; border-radius: 10px;
+      background: var(--brand); color: #fff; font-weight: 700; font-size: 13.5px;
+      transition: background .25s ease, transform .25s ease, box-shadow .25s ease;
+    }
+    .nav-cta:hover {
+      background: var(--brand-2); transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(7,42,77,.3); color: #fff;
+    }
+
+    /* ========== HERO ========== */
+    .hero-banner {
+      position: relative; overflow: hidden; isolation: isolate;
+      padding: 90px 0 110px; color: #fff;
+      background:
+        linear-gradient(120deg, rgba(4,17,32,.94) 0%, rgba(7,42,77,.88) 55%, rgba(14,62,107,.65) 100%),
+        url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=2000&q=80') center/cover no-repeat;
+    }
+    .hero-banner::after{
+      content:""; position:absolute; inset:0;
+      background:
+        radial-gradient(circle at 85% 30%, rgba(199,154,74,.22), transparent 40%),
+        radial-gradient(circle at 10% 90%, rgba(255,255,255,.05), transparent 35%);
+      pointer-events:none; z-index:-1;
+    }
+
+    .hero-grid {
+      display: grid; grid-template-columns: 1.15fr .85fr;
+      gap: 40px; align-items: center;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 8px 14px; border-radius: 999px;
+      background: rgba(255,255,255,.10); border: 1px solid rgba(255,255,255,.20);
+      color: #fff; font-size: 13px; font-weight: 600;
+      margin-bottom: 22px; backdrop-filter: blur(6px);
+    }
+    .hero-eyebrow i { color: var(--accent); }
+
+    .hero h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      margin: 0 0 18px;
+      font-size: clamp(40px, 5.4vw, 68px);
+      line-height: 1.05; letter-spacing: -.02em; font-weight: 800; color: #fff;
+    }
+    .hero h1 .accent { color: #e2bf7d; font-style: italic; }
+
+    .hero p.lead {
+      margin: 0; font-size: 18px;
+      color: rgba(255,255,255,.85); max-width: 60ch;
+    }
+
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 30px; }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      padding: 14px 20px; min-height: 50px; border-radius: 12px;
+      font-weight: 700; font-size: 14.5px;
+      border: 1px solid transparent; cursor: pointer; text-align: center;
+      transition: transform .25s ease, background .25s ease, border-color .25s ease, color .25s ease, box-shadow .25s ease;
+    }
+    .btn:hover { transform: translateY(-3px); }
+    .btn:active { transform: translateY(-1px); }
+    .btn i { transition: transform .25s ease; }
+    .btn:hover i { transform: translateX(3px); }
+
+    .btn-primary { background: var(--brand); color: #fff; box-shadow: 0 10px 25px rgba(7,42,77,.35); }
+    .btn-primary:hover { background: var(--brand-2); box-shadow: 0 14px 30px rgba(7,42,77,.45); }
+
+    .btn-accent { background: var(--accent); color: #fff; box-shadow: 0 10px 25px rgba(199,154,74,.35); }
+    .btn-accent:hover { background: var(--accent-2); box-shadow: 0 14px 30px rgba(199,154,74,.45); }
+
+    .btn-secondary { background: #fff; border-color: var(--border-strong); color: var(--text); }
+    .btn-secondary:hover { border-color: var(--brand); color: var(--brand); box-shadow: var(--shadow-sm); }
+
+    .btn-ghost-light {
+      background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.25);
+      color: #fff; backdrop-filter: blur(6px);
+    }
+    .btn-ghost-light:hover { background: rgba(255,255,255,.18); border-color: rgba(255,255,255,.4); }
+
+    /* Tarjeta lateral del hero */
+    .hero-card {
+      position: relative;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.20);
+      backdrop-filter: blur(14px);
+      border-radius: 20px;
+      padding: 22px;
+      box-shadow: var(--shadow-lg);
+      transition: transform .4s ease;
+    }
+    .hero-card:hover { transform: translateY(-4px); }
+
+    /* Avatar destacado dentro del hero */
+    .hero-profile {
+      display: flex; align-items: center; gap: 14px;
+      padding: 14px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.14);
+      margin-bottom: 16px;
+    }
+    .hero-profile img {
+      width: 64px; height: 64px; border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--accent);
+      box-shadow: 0 6px 18px rgba(0,0,0,.35);
+    }
+    .hero-profile .who strong {
+      display: block; color: #fff; font-size: 15px; font-weight: 700;
+    }
+    .hero-profile .who span {
+      display: block; color: rgba(255,255,255,.75); font-size: 13px;
+    }
+    .hero-profile .who .verified {
+      display: inline-flex; align-items: center; gap: 6px;
+      margin-top: 4px; font-size: 12px;
+      color: #e2bf7d; font-weight: 600;
+    }
+
+    .hero-card .preview {
+      border-radius: 14px; overflow: hidden;
+      border: 1px solid rgba(255,255,255,.15);
+    }
+    .hero-card .preview img {
+      width: 100%; height: 240px; object-fit: cover; display: block;
+      transition: transform .6s ease;
+    }
+    .hero-card:hover .preview img { transform: scale(1.05); }
+
+    .hero-card .meta {
+      display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+      margin-top: 16px; color:#fff;
+    }
+    .hero-card .meta .chip {
+      padding: 6px 12px; border-radius: 999px;
+      background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.18);
+      font-size: 12.5px; font-weight: 600;
+    }
+    .hero-card .meta .chip.gold {
+      background: rgba(226,191,125,.18); color:#f6ecd8; border-color: rgba(226,191,125,.35);
+    }
+
+    /* Stats flotantes */
+    .stats-row { margin-top: -56px; position: relative; z-index: 5; }
+    .stats-card {
+      background: #fff; border: 1px solid var(--border);
+      border-radius: var(--radius); box-shadow: var(--shadow);
+      padding: 22px;
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px;
+    }
+    .stat {
+      display: flex; align-items: center; gap: 14px; padding: 6px 8px;
+      border-radius: 12px; transition: background .25s ease, transform .25s ease;
+    }
+    .stat:hover { background: var(--surface-2); transform: translateY(-2px); }
+    .stat .icon {
+      width: 46px; height: 46px; border-radius: 12px;
+      display: grid; place-items: center;
+      background: var(--brand-soft); color: var(--brand);
+      font-size: 18px; flex-shrink: 0;
+      transition: transform .3s ease;
+    }
+    .stat:hover .icon { transform: rotate(-6deg) scale(1.08); }
+    .stat .icon.gold { background: var(--accent-soft); color: var(--accent); }
+    .stat strong { display: block; font-size: 20px; font-weight: 800; color: var(--text); }
+    .stat span { color: var(--muted); font-size: 13px; }
+
+    /* ========== TRUST ========== */
+    .trust { padding: 50px 0 10px; text-align: center; }
+    .trust .label {
+      color: var(--muted); font-size: 13px; letter-spacing: .12em;
+      text-transform: uppercase; font-weight: 600; margin-bottom: 16px;
+    }
+    .trust .logos {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 14px 16px;
+      color: var(--muted); font-weight: 600; font-size: 15px;
+    }
+    .trust .logos span {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 16px; border: 1px solid var(--border);
+      border-radius: 12px; background: #fff;
+      transition: transform .25s ease, border-color .25s ease, color .25s ease;
+    }
+    .trust .logos span:hover { transform: translateY(-3px); border-color: var(--brand); color: var(--brand); }
+    .trust .logos i { color: var(--brand); }
+
+    /* ========== SECCIONES ========== */
+    section { padding: 60px 0; }
+
+    .section-head {
+      display: flex; justify-content: space-between; gap: 16px;
+      align-items: end; margin-bottom: 28px; flex-wrap: wrap;
+    }
+    .section-head .left h2 {
+      margin: 0 0 6px;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(28px, 3vw, 38px);
+      letter-spacing: -.01em; color: var(--text); font-weight: 800;
+    }
+    .section-head .left .kicker {
+      color: var(--brand); font-weight: 700; letter-spacing: .14em;
+      text-transform: uppercase; font-size: 12.5px; margin-bottom: 8px;
+      display: inline-flex; align-items: center; gap: 8px;
+    }
+    .section-head p { margin: 0; color: var(--muted); max-width: 70ch; }
+
+    /* Cards */
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .card {
+      padding: 26px; border-radius: 18px;
+      background: var(--surface); border: 1px solid var(--border);
+      display: flex; flex-direction: column; gap: 14px;
+      transition: border-color .3s ease, transform .3s ease, box-shadow .3s ease;
+      position: relative; overflow: hidden;
+    }
+    .card::before {
+      content: ""; position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(7,42,77,.04), transparent 60%);
+      opacity: 0; transition: opacity .35s ease;
+      pointer-events: none;
+    }
+    .card:hover {
+      border-color: var(--brand);
+      transform: translateY(-6px);
+      box-shadow: var(--shadow);
+    }
+    .card:hover::before { opacity: 1; }
+
+    .card.featured {
+      background: linear-gradient(180deg, #fbf6ec 0%, #fff 100%);
+      border-color: #e6d4b1;
+    }
+    .card .icon-wrap {
+      width: 48px; height: 48px; border-radius: 12px;
+      background: var(--brand-soft); color: var(--brand);
+      display: grid; place-items: center; font-size: 20px;
+      transition: transform .3s ease;
+    }
+    .card:hover .icon-wrap { transform: rotate(-8deg) scale(1.1); }
+    .card.featured .icon-wrap { background: var(--accent-soft); color: var(--accent); }
+
+    .tag {
+      width: fit-content; padding: 5px 10px; border-radius: 999px;
+      font-size: 11.5px; font-weight: 800;
+      background: var(--brand-soft); color: var(--brand);
+      border: 1px solid #cdd9e8; letter-spacing: .5px; text-transform: uppercase;
+    }
+    .tag.gold { background: #f6ecd8; color: #8c6624; border-color: #ead6a8; }
+    .tag.blue { background: #dde7f3; color: #094175; border-color: #c1d2e6; }
+
+    .card h3 { margin: 0; font-size: 18.5px; line-height: 1.3; color: var(--text); font-weight: 700; }
+    .card p { margin: 0; color: var(--muted); font-size: 14.5px; flex: 1; }
+    .card .btn { width: 100%; }
+
+    .course-thumb {
+      height: 90px; border-radius: 12px;
+      display: grid; place-items: center;
+      color: #fff; font-size: 30px;
+      background: linear-gradient(135deg, #072a4d, #0e3e6b);
+      position: relative; overflow: hidden;
+      transition: transform .4s ease;
+    }
+    .card:hover .course-thumb { transform: scale(1.02); }
+    .course-thumb.alt-1 { background: linear-gradient(135deg, #0e3e6b, #155489); }
+    .course-thumb.alt-2 { background: linear-gradient(135deg, #c79a4a, #e2bf7d); }
+    .course-thumb.alt-3 { background: linear-gradient(135deg, #051c33, #072a4d); }
+    .course-thumb.alt-4 { background: linear-gradient(135deg, #1f5a8c, #0e3e6b); }
+    .course-thumb.alt-5 { background: linear-gradient(135deg, #8c6624, #c79a4a); }
+    .course-thumb::after{
+      content:""; position:absolute; inset:0;
+      background-image:
+        radial-gradient(circle at 20% 30%, rgba(255,255,255,.18), transparent 30%),
+        radial-gradient(circle at 80% 70%, rgba(255,255,255,.10), transparent 30%);
+    }
+
+    /* ========== SKOOL ========== */
+    .skool-wrap {
+      display: grid; grid-template-columns: 1.05fr .95fr;
+      gap: 28px; align-items: stretch;
+    }
+    .skool-image {
+      border-radius: var(--radius); overflow: hidden;
+      border: 1px solid var(--border); box-shadow: var(--shadow);
+      position: relative; min-height: 420px;
+      background:
+        linear-gradient(180deg, rgba(7,42,77,.55), rgba(7,42,77,.88)),
+        url('https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+      color: #fff; padding: 32px;
+      display: flex; flex-direction: column; justify-content: space-between;
+      transition: transform .35s ease;
+    }
+    .skool-image:hover { transform: translateY(-4px); }
+    .skool-image .badge {
+      align-self: flex-start;
+      padding: 6px 12px; border-radius: 999px;
+      background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.25);
+      font-size: 12.5px; font-weight: 700; color:#fff; backdrop-filter: blur(6px);
+    }
+    .skool-image h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(24px, 2.6vw, 32px);
+      margin: 0; line-height: 1.15;
+    }
+    .skool-image .price { display: inline-flex; gap: 12px; flex-wrap: wrap; margin-top: 14px; }
+    .skool-image .price-pill {
+      padding: 8px 14px; border-radius: 12px;
+      background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.22);
+      font-size: 13.5px; font-weight: 700;
+    }
+
+    .skool-list {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 30px; box-shadow: var(--shadow-sm);
+    }
+    .skool-list h3 {
+      margin: 0 0 14px; font-family: 'Playfair Display', serif;
+      font-size: 24px; color: var(--text);
+    }
+    .feature {
+      display: flex; gap: 14px; padding: 12px 0;
+      border-bottom: 1px dashed var(--border);
+      transition: padding-left .25s ease;
+    }
+    .feature:hover { padding-left: 6px; }
+    .feature:last-child { border-bottom: 0; }
+    .feature .ico {
+      width: 38px; height: 38px; border-radius: 10px;
+      background: var(--brand-soft); color: var(--brand);
+      display: grid; place-items: center; flex-shrink: 0;
+      transition: transform .3s ease;
+    }
+    .feature:hover .ico { transform: rotate(-6deg) scale(1.1); }
+    .feature strong { display: block; color: var(--text); font-weight: 700; font-size: 15px; }
+    .feature span { color: var(--muted); font-size: 14px; }
+
+    /* ========== DOCENCIA ========== */
+    .docencia-banner {
+      position: relative; overflow: hidden;
+      border-radius: 22px; padding: 50px;
+      color: #fff;
+      background:
+        linear-gradient(120deg, rgba(7,42,77,.94), rgba(14,62,107,.82)),
+        url('https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=2000&q=80') center/cover no-repeat;
+      box-shadow: var(--shadow-lg);
+    }
+    .docencia-banner::after{
+      content:""; position:absolute; inset:0;
+      background: radial-gradient(circle at 90% 20%, rgba(199,154,74,.25), transparent 45%);
+      pointer-events:none;
+    }
+    .docencia-banner > * { position: relative; z-index: 1; }
+    .docencia-banner h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(24px, 2.6vw, 34px); margin: 0 0 10px;
+    }
+    .docencia-banner p { margin: 0 0 22px; max-width: 70ch; color: rgba(255,255,255,.9); }
+    .docencia-banner .actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+    .audience-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 14px; margin-top: 22px;
+    }
+    .audience {
+      padding: 22px; border-radius: 14px;
+      background: var(--surface); border: 1px solid var(--border);
+      text-align: center;
+      transition: border-color .3s ease, transform .3s ease, box-shadow .3s ease;
+    }
+    .audience:hover {
+      border-color: var(--brand);
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-sm);
+    }
+    .audience .ico {
+      width: 50px; height: 50px; border-radius: 14px;
+      background: var(--brand-soft); color: var(--brand);
+      display: grid; place-items: center; font-size: 20px;
+      margin: 0 auto 10px;
+      transition: transform .3s ease, background .3s ease, color .3s ease;
+    }
+    .audience:hover .ico { background: var(--brand); color: #fff; transform: rotate(-8deg) scale(1.1); }
+    .audience strong { display: block; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+    .audience span { color: var(--muted); font-size: 13px; }
+
+    /* ========== EDUCACIÓN ========== */
+    .edu-list { display: grid; gap: 14px; }
+    .edu-item {
+      padding: 22px 24px; border-radius: 16px;
+      background: var(--surface); border: 1px solid var(--border);
+      border-left: 4px solid var(--brand);
+      display: grid; grid-template-columns: 56px 1fr auto;
+      gap: 18px; align-items: center;
+      transition: transform .3s ease, box-shadow .3s ease, border-left-color .3s ease;
+    }
+    .edu-item:hover {
+      transform: translateX(6px);
+      box-shadow: var(--shadow-sm);
+      border-left-color: var(--accent);
+    }
+    .edu-item .ico {
+      width: 52px; height: 52px; border-radius: 12px;
+      background: var(--brand-soft); color: var(--brand);
+      display: grid; place-items: center; font-size: 20px;
+      transition: transform .3s ease;
+    }
+    .edu-item:hover .ico { transform: rotate(-8deg) scale(1.08); }
+    .edu-item h4 { margin: 0 0 4px; font-size: 16.5px; color: var(--text); font-weight: 700; }
+    .edu-item .meta { color: var(--muted); font-size: 14px; }
+    .edu-item .period {
+      padding: 6px 12px; border-radius: 999px;
+      background: var(--surface-2); color: var(--brand);
+      border: 1px solid var(--border);
+      font-size: 12.5px; font-weight: 700; white-space: nowrap;
+    }
+
+    /* ========== CONTACTO ========== */
+    .contact-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 22px; }
+    .contact-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 30px; box-shadow: var(--shadow-sm);
+    }
+    .contact-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px; margin: 0 0 14px; color: var(--text);
+    }
+    .contact-row {
+      display: flex; gap: 14px; align-items: center;
+      padding: 14px 0; border-bottom: 1px dashed var(--border);
+      transition: padding-left .25s ease;
+    }
+    .contact-row:hover { padding-left: 6px; }
+    .contact-row:last-child { border-bottom: 0; }
+    .contact-row .ico {
+      width: 44px; height: 44px; border-radius: 12px;
+      background: var(--brand-soft); color: var(--brand);
+      display: grid; place-items: center; font-size: 18px; flex-shrink: 0;
+      transition: background .3s ease, color .3s ease;
+    }
+    .contact-row:hover .ico { background: var(--brand); color: #fff; }
+    .contact-row strong { display: block; color: var(--text); font-weight: 700; font-size: 14.5px; }
+    .contact-row a { color: var(--brand); font-weight: 600; font-size: 14px; }
+    .contact-row a:hover { text-decoration: underline; }
+
+    .credentials { background: var(--surface-2); }
+    .credentials ul { margin: 6px 0 0; padding-left: 0; list-style: none; }
+    .credentials li {
+      padding: 10px 0; color: var(--muted);
+      display: flex; gap: 10px; align-items: center;
+      border-bottom: 1px dashed var(--border);
+      transition: color .25s ease, padding-left .25s ease;
+    }
+    .credentials li:hover { color: var(--text); padding-left: 6px; }
+    .credentials li:last-child { border-bottom: 0; }
+    .credentials li i { color: var(--brand); }
+
+    /* ========== FOOTER ========== */
+    footer {
+      padding: 40px 0; color: var(--muted);
+      text-align: center; font-size: 14px;
+      border-top: 1px solid var(--border); background: #fff;
+      margin-top: 30px;
+    }
+    footer .social { display: flex; gap: 12px; justify-content: center; margin-top: 14px; }
+    footer .social a {
+      width: 42px; height: 42px; border-radius: 50%;
+      background: var(--surface-2); color: var(--brand);
+      display: grid; place-items: center;
+      transition: background .3s ease, color .3s ease, transform .3s ease;
+    }
+    footer .social a:hover {
+      background: var(--brand); color: #fff;
+      transform: translateY(-3px) rotate(-6deg);
+    }
+
+    /* ========== BACK TO TOP ========== */
+    .to-top {
+      position: fixed; right: 22px; bottom: 22px;
+      width: 48px; height: 48px; border-radius: 50%;
+      background: var(--brand); color: #fff;
+      display: grid; place-items: center; font-size: 16px;
+      box-shadow: var(--shadow);
+      opacity: 0; pointer-events: none; transform: translateY(10px);
+      transition: opacity .3s ease, transform .3s ease, background .25s ease;
+      z-index: 60;
+    }
+    .to-top.show { opacity: 1; pointer-events: auto; transform: translateY(0); }
+    .to-top:hover { background: var(--brand-2); }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 1024px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .stats-card { grid-template-columns: repeat(2, 1fr); }
+      .cards { grid-template-columns: repeat(2, 1fr); }
+      .skool-wrap, .contact-grid { grid-template-columns: 1fr; }
+      .audience-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 640px) {
+      .hero-banner { padding: 60px 0 90px; }
+      .cards { grid-template-columns: 1fr; }
+      .docencia-banner { padding: 32px 24px; }
+      .stats-card { grid-template-columns: 1fr; padding: 18px; }
+      .nav { flex-direction: column; align-items: flex-start; }
+      .nav-cta { display: none; }
+      .brand-text span { white-space: normal; }
+      .edu-item { grid-template-columns: 1fr; text-align: left; }
+      .edu-item .period { justify-self: start; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========== TOPBAR ========== -->
+  <header class="topbar" id="topbar">
+    <div class="container">
+      <nav class="nav">
+        <div class="brand">
+          <img class="brand-avatar" src="assets/gilvard.jpg" alt="Gilvard Pérez" onerror="this.style.display='none'" />
+          <div class="brand-text">
+            <strong>Gilvard Pérez</strong>
+            <span>Microsoft MVP · Power BI · DAX · Analítica de datos</span>
+          </div>
+        </div>
+        <div class="nav-links">
+          <a href="#oferta">Oferta</a>
+          <a href="#cursos">Cursos</a>
+          <a href="#skool">Skool</a>
+          <a href="#docencia">Docencia</a>
+          <a href="#educacion">Formación</a>
+          <a href="#contacto">Contacto</a>
+        </div>
+        <a class="nav-cta" href="https://www.skool.com/club-power-bi-9524/about" target="_blank" rel="noopener noreferrer">
+          <i class="fa-solid fa-users"></i> Unirme a Skool
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ========== HERO ========== -->
+  <section class="hero-banner">
+    <div class="container hero-grid">
+      <div data-aos="fade-right">
+        <div class="hero-eyebrow">
+          <i class="fa-solid fa-chart-line"></i> Aprende · Únete · Contrátame
+        </div>
+        <h1 class="hero">Convierte tus datos en <span class="accent">decisiones estratégicas</span> de alto impacto.</h1>
+        <p class="lead">
+          Cursos prácticos de Power BI, DAX, Power Query y analítica avanzada. Una comunidad activa en Skool con
+          actualizaciones, talleres y contenido exclusivo. Y, si lo necesitas, formación a medida como docente
+          independiente para universidades, comunidades y empresas.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn btn-accent" href="https://www.skool.com/club-power-bi-9524/about" target="_blank" rel="noopener noreferrer">
+            <i class="fa-solid fa-users"></i> Unirme a Skool
+          </a>
+          <a class="btn btn-ghost-light" href="mailto:gilvardperez@hotmail.com?subject=Inter%C3%A9s%20en%20docencia%20o%20capacitaci%C3%B3n">
+            <i class="fa-solid fa-chalkboard-user"></i> Contratarme como docente
+          </a>
+          <a class="btn btn-ghost-light" href="#cursos">
+            <i class="fa-solid fa-graduation-cap"></i> Ver cursos
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-card" data-aos="fade-left">
+        <div class="hero-profile">
+          <img src="assets/gilvard.jpg" alt="Foto de Gilvard Pérez" onerror="this.src='https://ui-avatars.com/api/?name=Gilvard+Perez&background=072a4d&color=fff&size=200'" />
+          <div class="who">
+            <strong>Gilvard Pérez</strong>
+            <span>Microsoft MVP · Power BI</span>
+            <span class="verified"><i class="fa-solid fa-circle-check"></i> +30,000 estudiantes</span>
+          </div>
+        </div>
+        <div class="preview">
+          <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80" alt="Dashboard de analítica" />
+        </div>
+        <div class="meta">
+          <span class="chip gold"><i class="fa-solid fa-star"></i> Bestseller</span>
+          <span class="chip"><i class="fa-solid fa-bolt"></i> Power BI · DAX</span>
+          <span class="chip"><i class="fa-solid fa-fire"></i> +30K alumnos</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== STATS ========== -->
+  <div class="container stats-row">
+    <div class="stats-card" data-aos="fade-up">
+      <div class="stat">
+        <div class="icon"><i class="fa-solid fa-user-graduate"></i></div>
+        <div><strong data-counter="30000" data-suffix="+">0</strong><span>estudiantes en Udemy</span></div>
+      </div>
+      <div class="stat">
+        <div class="icon gold"><i class="fa-solid fa-medal"></i></div>
+        <div><strong>Microsoft MVP</strong><span>Power BI</span></div>
+      </div>
+      <div class="stat">
+        <div class="icon"><i class="fa-solid fa-briefcase"></i></div>
+        <div><strong data-counter="5" data-suffix="+ años">0</strong><span>en BI y análisis de datos</span></div>
+      </div>
+      <div class="stat">
+        <div class="icon gold"><i class="fa-solid fa-globe"></i></div>
+        <div><strong data-counter="50" data-suffix="+ ponencias">0</strong><span>internacionales</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== TRUST ========== -->
+  <section class="trust">
+    <div class="container">
+      <div class="label">Tecnologías y áreas en las que formo</div>
+      <div class="logos" data-aos="fade-up">
+        <span><i class="fa-solid fa-chart-pie"></i> Power BI</span>
+        <span><i class="fa-solid fa-code"></i> DAX</span>
+        <span><i class="fa-solid fa-database"></i> Power Query</span>
+        <span><i class="fa-solid fa-cloud"></i> Microsoft Fabric</span>
+        <span><i class="fa-brands fa-python"></i> Python</span>
+        <span><i class="fa-solid fa-square-root-variable"></i> R</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== OFERTA ========== -->
+  <section id="oferta">
+    <div class="container">
+      <div class="section-head" data-aos="fade-up">
+        <div class="left">
+          <div class="kicker"><i class="fa-solid fa-bullseye"></i> Qué ofrezco</div>
+          <h2 class="serif">Tres caminos para trabajar conmigo</h2>
+          <p>Aprende a tu ritmo, intégrate a la comunidad o trae formación profesional a tu equipo.</p>
+        </div>
+      </div>
+
+      <div class="cards">
+        <article class="card featured" data-aos="fade-up" data-aos-delay="0">
+          <div class="icon-wrap"><i class="fa-solid fa-users"></i></div>
+          <span class="tag gold">Comunidad</span>
+          <h3>Skool: cursos + actualizaciones + recursos</h3>
+          <p>Acceso a una comunidad con cursos, videos recientes, talleres mensuales, webinars y buenas prácticas.</p>
+          <a class="btn btn-accent" href="https://www.skool.com/club-power-bi-9524/about" target="_blank" rel="noopener noreferrer">
+            Entrar a Skool <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </article>
+
+        <article class="card" data-aos="fade-up" data-aos-delay="100">
+          <div class="icon-wrap"><i class="fa-solid fa-graduation-cap"></i></div>
+          <span class="tag blue">Cursos</span>
+          <h3>Udemy: formación práctica y especializada</h3>
+          <p>Cursos para aprender Power BI, DAX, Power Query, forecasting, analítica avanzada y casos reales.</p>
+          <a class="btn btn-secondary" href="#cursos">
+            Explorar cursos <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </article>
+
+        <article class="card" data-aos="fade-up" data-aos-delay="200">
+          <div class="icon-wrap"><i class="fa-solid fa-chalkboard-user"></i></div>
+          <span class="tag">Docencia</span>
+          <h3>Universidades, comunidades y empresas</h3>
+          <p>Formación independiente, adaptable a tu necesidad, en modalidad virtual o presencial.</p>
+          <a class="btn btn-primary" href="#docencia">
+            Solicitar propuesta <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CURSOS ========== -->
+  <section id="cursos">
+    <div class="container">
+      <div class="section-head" data-aos="fade-up">
+        <div class="left">
+          <div class="kicker"><i class="fa-solid fa-graduation-cap"></i> Cursos en Udemy</div>
+          <h2 class="serif">Mis cursos, ordenados por impacto</h2>
+          <p>Selecciona el curso que más se ajuste a tu nivel o a las necesidades de tu equipo.</p>
+        </div>
+      </div>
+
+      <div class="cards">
+        <article class="card featured" data-aos="zoom-in" data-aos-delay="0">
+          <div class="course-thumb alt-2"><i class="fa-solid fa-gift"></i></div>
+          <span class="tag gold">Gratis</span>
+          <h3>Power BI · Crea un proyecto desde Power BI Service</h3>
+          <p>Curso gratuito ideal para comenzar y entender el enfoque práctico de mis contenidos.</p>
+          <a class="btn btn-accent" href="https://www.udemy.com/course/power-bi-crea-un-proyecto-desde-power-bi-service/?referralCode=0EEA2D0C6CFBDAD25BEF" target="_blank" rel="noopener noreferrer">
+            Ver gratis <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </a>
+        </article>
+
+        <article class="card featured" data-aos="zoom-in" data-aos-delay="80">
+          <div class="course-thumb alt-5"><i class="fa-solid fa-crown"></i></div>
+          <span class="tag gold">Bestseller</span>
+          <h3>Especialización en lenguaje DAX para análisis de negocios</h3>
+          <p>El curso destacado para dominar DAX y llevar tus análisis al siguiente nivel.</p>
+          <a class="btn btn-accent" href="https://www.udemy.com/course/especializacion-en-dax-para-analisis-de-negocios/?referralCode=3DE7837089C758D2C2B7" target="_blank" rel="noopener noreferrer">
+            Ver bestseller <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </a>
+        </article>
+
+        <article class="card" data-aos="zoom-in" data-aos-delay="160">
+          <div class="course-thumb alt-1"><i class="fa-solid fa-database"></i></div>
+          <span class="tag blue">Pago</span>
+          <h3>Especialización en transformación de datos con Power Query</h3>
+          <p>Aprende a transformar y preparar datos de forma eficiente.</p>
+          <a class="btn btn-secondary" href="https://www.udemy.com/course/especializacion-en-transformacion-de-datos-con-power-query/?referralCode=53C11E268BE6C7FADD10" target="_blank" rel="noopener noreferrer">
+            Ir al curso <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </a>
+        </article>
+
+        <article class="card" data-aos="zoom-in" data-aos-delay="0">
+          <div class="course-thumb"><i class="fa-solid fa-eye"></i></div>
+          <span class="tag blue">Pago</span>
+          <h3>Power BI · Cálculos Visuales</h3>
+          <p>Profundiza en la lógica y uso de cálculos visuales en Power BI.</p>
+          <a class="btn btn-secondary" href="https://www.udemy.com/course/power-bi-calculos-visuales/?referralCode=DF7BA0D9D841A778C2D9" target="_blank" rel="noopener noreferrer">
+            Ir al curso <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </a>
+        </article>
+
+        <article class="card" data-aos="zoom-in" data-aos-delay="80">
+          <div class="course-thumb alt-4"><i class="fa-solid fa-chart-line"></i></div>
+          <span class="tag blue">Pago</span>
+          <h3>Power BI para el análisis de Forecasting</h3>
+          <p>Aplica análisis de forecasting a escenarios de negocio y proyección.</p>
+          <a class="btn btn-secondary" href="https://www.udemy.com/course/power-bi-para-el-analisis-de-forecasting/?referralCode=21CE6A1037E28529891A" target="_blank" rel="noopener noreferrer">
+            Ir al curso <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </a>
+        </article>
+
+        <article class="card" data-aos="zoom-in" data-aos-delay="160">
+          <div class="course-thumb alt-3"><i class="fa-solid fa-briefcase"></i></div>
+          <span class="tag blue">Pago</span>
+          <h3>Inteligencia de negocios con Power BI Desktop</h3>
+          <p>Un curso clave para desarrollar bases sólidas en business intelligence.</p>
+          <a class="btn btn-secondary" href="https://www.udemy.com/course/inteligencia-de-negocios-con-power-bi-desktop/?referralCode=8392FB39B36D80C68A5A" target="_blank" rel="noopener noreferrer">
+            Ir al curso <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </a>
+        </article>
+
+        <article class="card" data-aos="zoom-in" data-aos-delay="0">
+          <div class="course-thumb alt-1"><i class="fa-solid fa-brain"></i></div>
+          <span class="tag blue">Pago</span>
+          <h3>Analítica avanzada con Power BI</h3>
+          <p>Potencia tu capacidad de análisis con técnicas avanzadas.</p>
+          <a class="btn btn-secondary" href="https://www.udemy.com/course/analitica-avanzada-con-power-bi/?referralCode=E6A64B4BB1D51F565CB7" target="_blank" rel="noopener noreferrer">
+            Ir al curso <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </a>
+        </article>
+
+        <article class="card" data-aos="zoom-in" data-aos-delay="80">
+          <div class="course-thumb"><i class="fa-solid fa-rocket"></i></div>
+          <span class="tag blue">Pago</span>
+          <h3>Power BI · Mi primer proyecto · Fitness Life</h3>
+          <p>Desarrolla un proyecto práctico paso a paso con enfoque real.</p>
+          <a class="btn btn-secondary" href="https://www.udemy.com/course/power-bi-mi-primer-proyecto-fitness-life/?referralCode=F082B478182F53EE3274" target="_blank" rel="noopener noreferrer">
+            Ir al curso <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SKOOL ========== -->
+  <section id="skool">
+    <div class="container">
+      <div class="section-head" data-aos="fade-up">
+        <div class="left">
+          <div class="kicker"><i class="fa-solid fa-users"></i> Comunidad Skool</div>
+          <h2 class="serif">El club privado para crecer en BI</h2>
+          <p>Un espacio profesional con cursos, actualizaciones, videos recientes y contenido aplicable.</p>
+        </div>
+      </div>
+
+      <div class="skool-wrap">
+        <div class="skool-image" data-aos="fade-right">
+          <span class="badge"><i class="fa-solid fa-shield-halved"></i> Comunidad privada</span>
+          <div>
+            <h3>Club Power BI · Aprende, aplica y mantente actualizado</h3>
+            <div class="price">
+              <span class="price-pill"><i class="fa-solid fa-tag"></i> USD 4 / mes</span>
+              <span class="price-pill"><i class="fa-solid fa-calendar"></i> USD 35 / año</span>
+            </div>
+            <div style="margin-top: 22px;">
+              <a class="btn btn-accent" href="https://www.skool.com/club-power-bi-9524/about" target="_blank" rel="noopener noreferrer">
+                <i class="fa-solid fa-arrow-right-to-bracket"></i> Unirme a la comunidad
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="skool-list" data-aos="fade-left">
+          <h3>Qué incluye</h3>
+          <div class="feature">
+            <div class="ico"><i class="fa-solid fa-book-open"></i></div>
+            <div><strong>7 cursos + actualizaciones exclusivas</strong><span>Power BI, DAX, Power Query, analítica avanzada, forecasting y más.</span></div>
+          </div>
+          <div class="feature">
+            <div class="ico"><i class="fa-solid fa-video"></i></div>
+            <div><strong>Videos especializados</strong><span>Casos de uso, buenas prácticas y tips aplicables.</span></div>
+          </div>
+          <div class="feature">
+            <div class="ico"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+            <div><strong>Talleres mensuales del club</strong><span>Sesiones prácticas para reforzar habilidades.</span></div>
+          </div>
+          <div class="feature">
+            <div class="ico"><i class="fa-solid fa-tower-broadcast"></i></div>
+            <div><strong>Webinars y posts de actualizaciones</strong><span>Mantente al día con DataViz, DAX y novedades.</span></div>
+          </div>
+          <div class="feature">
+            <div class="ico"><i class="fa-solid fa-envelope-open-text"></i></div>
+            <div><strong>Acceso simple</strong><span>Clic en “Join Group” y recibirás el correo de aceptación durante el día.</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== DOCENCIA ========== -->
+  <section id="docencia">
+    <div class="container">
+      <div class="section-head" data-aos="fade-up">
+        <div class="left">
+          <div class="kicker"><i class="fa-solid fa-chalkboard-user"></i> Docente independiente</div>
+          <h2 class="serif">Lleva formación de élite a tu organización</h2>
+          <p>Capacitación a medida en Power BI, DAX, Power Query, analítica y visualización de datos.</p>
+        </div>
+      </div>
+
+      <div class="docencia-banner" data-aos="zoom-in-up">
+        <h3>Clases, talleres, diplomados y programas corporativos</h3>
+        <p>
+          Apoyo a universidades, comunidades, empresas y equipos internos con un enfoque que combina
+          claridad, práctica, diseño de experiencia de aprendizaje y aplicación real al negocio.
+        </p>
+        <div class="actions">
+          <a class="btn btn-accent" href="mailto:gilvardperez@hotmail.com?subject=Solicitud%20de%20docencia%20independiente%20o%20capacitaci%C3%B3n">
+            <i class="fa-solid fa-paper-plane"></i> Solicitar propuesta
+          </a>
+          <a class="btn btn-ghost-light" href="https://www.linkedin.com/in/gilvardperez" target="_blank" rel="noopener noreferrer">
+            <i class="fa-brands fa-linkedin"></i> Ver perfil en LinkedIn
+          </a>
+        </div>
+      </div>
+
+      <div class="audience-grid">
+        <div class="audience" data-aos="fade-up" data-aos-delay="0">
+          <div class="ico"><i class="fa-solid fa-building-columns"></i></div>
+          <strong>Universidades</strong><span>Cursos, módulos y diplomados</span>
+        </div>
+        <div class="audience" data-aos="fade-up" data-aos-delay="80">
+          <div class="ico"><i class="fa-solid fa-people-group"></i></div>
+          <strong>Comunidades</strong><span>Programas y especializaciones</span>
+        </div>
+        <div class="audience" data-aos="fade-up" data-aos-delay="160">
+          <div class="ico"><i class="fa-solid fa-building"></i></div>
+          <strong>Empresas</strong><span>Capacitación in-company</span>
+        </div>
+        <div class="audience" data-aos="fade-up" data-aos-delay="240">
+          <div class="ico"><i class="fa-solid fa-microphone-lines"></i></div>
+          <strong>Conferencias</strong><span>Ponencias y talleres</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== EDUCACIÓN ========== -->
+  <section id="educacion">
+    <div class="container">
+      <div class="section-head" data-aos="fade-up">
+        <div class="left">
+          <div class="kicker"><i class="fa-solid fa-user-graduate"></i> Formación académica</div>
+          <h2 class="serif">Una base sólida que respalda mi enfoque</h2>
+          <p>Combinación de gestión, mercadotecnia y especialización financiera para abordar los datos con criterio estratégico.</p>
+        </div>
+      </div>
+
+      <div class="edu-list">
+        <div class="edu-item" data-aos="fade-up">
+          <div class="ico"><i class="fa-solid fa-coins"></i></div>
+          <div>
+            <h4>Especialización en Riesgos Financieros y Ciencias Actuariales</h4>
+            <div class="meta">Universidad de San Carlos de Guatemala · Economía financiera y actuarial</div>
+          </div>
+          <span class="period">Ene 2025 — Nov 2025</span>
+        </div>
+
+        <div class="edu-item" data-aos="fade-up" data-aos-delay="80">
+          <div class="ico"><i class="fa-solid fa-diagram-project"></i></div>
+          <div>
+            <h4>Maestría en Gestión de Proyectos para el Desarrollo</h4>
+            <div class="meta">Universidad de San Carlos de Guatemala · Master's degree, management in development projects</div>
+          </div>
+          <span class="period">Ene 2017 — Dic 2018</span>
+        </div>
+
+        <div class="edu-item" data-aos="fade-up" data-aos-delay="160">
+          <div class="ico"><i class="fa-solid fa-bullhorn"></i></div>
+          <div>
+            <h4>Licenciatura en Informática y Administración de la Mercadotecnia</h4>
+            <div class="meta">Universidad Galileo · Marketing / Marketing Management</div>
+          </div>
+          <span class="period">2010 — 2015</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CONTACTO ========== -->
+  <section id="contacto">
+    <div class="container">
+      <div class="section-head" data-aos="fade-up">
+        <div class="left">
+          <div class="kicker"><i class="fa-solid fa-envelope"></i> Contacto directo</div>
+          <h2 class="serif">¿Hablamos?</h2>
+          <p>Si quieres información sobre cursos, Skool o contratación como docente, escríbeme por cualquier vía.</p>
+        </div>
+      </div>
+
+      <div class="contact-grid">
+        <div class="contact-card" data-aos="fade-right">
+          <h3>Escríbeme</h3>
+          <div class="contact-row">
+            <div class="ico"><i class="fa-solid fa-envelope"></i></div>
+            <div><strong>Email</strong><a href="mailto:gilvardperez@hotmail.com">gilvardperez@hotmail.com</a></div>
+          </div>
+          <div class="contact-row">
+            <div class="ico"><i class="fa-brands fa-linkedin-in"></i></div>
+            <div><strong>LinkedIn</strong><a href="https://www.linkedin.com/in/gilvardperez" target="_blank" rel="noopener noreferrer">linkedin.com/in/gilvardperez</a></div>
+          </div>
+          <div class="contact-row">
+            <div class="ico"><i class="fa-solid fa-location-dot"></i></div>
+            <div><strong>Ubicación</strong><a>San Marcos, Guatemala</a></div>
+          </div>
+          <div class="contact-row">
+            <div class="ico"><i class="fa-solid fa-users"></i></div>
+            <div><strong>Comunidad</strong><a href="https://www.skool.com/club-power-bi-9524/about" target="_blank" rel="noopener noreferrer">skool.com/club-power-bi-9524</a></div>
+          </div>
+        </div>
+
+        <div class="contact-card credentials" data-aos="fade-left">
+          <h3>Credenciales destacadas</h3>
+          <ul>
+            <li><i class="fa-solid fa-medal"></i> Microsoft MVP · Power BI</li>
+            <li><i class="fa-solid fa-certificate"></i> Certificación PL-300 (5 años consecutivos)</li>
+            <li><i class="fa-solid fa-handshake"></i> Coaching en liderazgo (certificación internacional)</li>
+            <li><i class="fa-solid fa-lightbulb"></i> Design Thinking avanzado: prototipado y testing</li>
+            <li><i class="fa-solid fa-gauge-high"></i> Six Sigma Yellow Belt</li>
+            <li><i class="fa-solid fa-trophy"></i> Premios y reconocimientos en Data & Analytics</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer>
+    <div class="container">
+      © 2026 Gilvard Pérez · Microsoft MVP · Power BI · Hecho con dedicación para GitHub Pages.
+      <div class="social">
+        <a href="mailto:gilvardperez@hotmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+        <a href="https://www.linkedin.com/in/gilvardperez" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="https://www.skool.com/club-power-bi-9524/about" target="_blank" rel="noopener noreferrer" aria-label="Skool"><i class="fa-solid fa-users"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Botón volver arriba -->
+  <a href="#top" class="to-top" id="toTop" aria-label="Volver arriba"><i class="fa-solid fa-arrow-up"></i></a>
+
+  <!-- Librería de animaciones -->
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    // Inicializar AOS
+    AOS.init({
+      duration: 700,
+      easing: 'ease-out-cubic',
+      once: true,
+      offset: 60
+    });
+
+    // Sombra al hacer scroll en el topbar
+    const topbar = document.getElementById('topbar');
+    const toTop = document.getElementById('toTop');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 20) topbar.classList.add('scrolled');
+      else topbar.classList.remove('scrolled');
+
+      if (window.scrollY > 600) toTop.classList.add('show');
+      else toTop.classList.remove('show');
+    });
+
+    // Animación de contadores en stats
+    const counters = document.querySelectorAll('[data-counter]');
+    const animateCounter = (el) => {
+      const target = +el.dataset.counter;
+      const suffix = el.dataset.suffix || '';
+      const duration = 1400;
+      const startTime = performance.now();
+      const format = (n) => n >= 1000 ? n.toLocaleString('es-ES') : n;
+
+      const tick = (now) => {
+        const progress = Math.min((now - startTime) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const value = Math.floor(target * eased);
+        el.textContent = format(value) + suffix;
+        if (progress < 1) requestAnimationFrame(tick);
+        else el.textContent = format(target) + suffix;
+      };
+      requestAnimationFrame(tick);
+    };
+
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animateCounter(entry.target);
+          counterObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.4 });
+    counters.forEach(c => counterObserver.observe(c));
+  </script>
+
+</body>
+</html>
